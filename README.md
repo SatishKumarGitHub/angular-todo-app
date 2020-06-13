@@ -1,27 +1,42 @@
-# TdfForm
+# Angular Todo Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.4.
+ 
 
-## Development server
+This project was generated with [Angular CLI] 9.1.4.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+##  Routing
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ -> how to set default routing
+ -> page not found routing
+ -> routing from code using ActivatedRoute
+ -> do not user "href" as it will load entire page use 'routerLink' attribute
 
-## Build
+##  service
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+-> Hardcoded Authentication service (i.e static authentication serice)
+-> after sucessful login store the username in th session (key = authenticatedUser)
+-> check the user is logged in user or not in the session (key = authenticatedUser)
+-> remove then session key while logout (removeItem)
 
-## Running unit tests
+## Header Menu
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+-> Show and Hide the Menu based on logged in or logged out user
+-> using `*ngIf = staticAuthenticateService.isLoggedInUser()`
+-> when we are calling the 'staticAuthenticateService.isLoggedInUser()' in the header         compoenent does not work as it will load only once
+hence we have to call the service 
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+## Guard Route
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+-> if user is loggedout ( i.e sessionStorage does not conatin our key ) then disable the route menu using canActivate: [RouteGuardService]
+
+-> implemented CanActivate interface
+-> override canActivate() method
+-> add those router links which you want to show after login 
+
+-> code
+  `{path:'home/:username',component:HomeComponent, canActivate : [RouteGuardService]},
+{path:'todos',component:TodoListComponent, canActivate : [RouteGuardService]},
+{path:'logout',component:LogoutComponent, canActivate : [RouteGuardService]},`

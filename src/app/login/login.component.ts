@@ -18,10 +18,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
+
   login() {
     if (this.staticAuthenticationService.authendicate(this.username,this.password)) {
       this.isInvalidCredentials = false;
-      this.router.navigate(['/home',this.username]);
+      this.router.navigate(['/home', this.username]);
     } else {
       this.isInvalidCredentials = true;
     }

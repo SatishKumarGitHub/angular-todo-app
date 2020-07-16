@@ -2,6 +2,12 @@
 
     <h1 class="bg-center text-primary"> To Do Application </h1>
 
+    <div class="alert-danger container-sm" *ngIf="isInvalidCredentials">
+        <div class="space"> </div>
+        <h4> Invalid Credential</h4>
+    </div>
+
+
     <form>
         <div class="form-group">
 
@@ -22,11 +28,19 @@
         <h4 class="invalid-feedback" *ngIf="isInvalidCredentials"> Invalid Credentails </h4>
     </div> -->
     &nbsp;&nbsp;
-    <div class="alert-danger container-sm" *ngIf="isInvalidCredentials">
-        <div class="space"> </div>
-        <h4> Invalid Credential</h4>
 
-    </div>
 
+    <!-- <div class="mb-4">
+       New user
+        <a routerLink="/register">
+            Register
+        </a>
+    </div> -->
+    <div class="mb-4">
+      New user
+       <a routerLink="/reactive-register">
+          Reactive Register
+       </a>
+   </div>
 
 </div>

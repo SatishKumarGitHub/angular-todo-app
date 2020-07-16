@@ -6,31 +6,39 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RouteGuardService } from './service/route-guard.service';
-
-
+import { RegistrationComponent } from './forms/registration/registration.component';
+import {ReactiveFormComponent} from './reactive-form/reactive-form/reactive-form.component';
 const routes: Routes = [
-{path : '', redirectTo:'/login',pathMatch:'full'},
-{path:'login',component:LoginComponent},
-{path:'home/:username',component:HomeComponent, canActivate : [RouteGuardService]},
-{path:'todos',component:TodoListComponent, canActivate : [RouteGuardService]},
-{path:'logout',component:LogoutComponent, canActivate : [RouteGuardService]},
-{path:'**',component:PageNotFoundComponent}
-
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegistrationComponent },
+  { path: 'reactive-register', component: ReactiveFormComponent },
+  {path: 'home/:username', component: HomeComponent, canActivate : [RouteGuardService]},
+  {
+    path: 'todos',
+    component: TodoListComponent,
+    canActivate: [RouteGuardService],
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent,
+    canActivate: [RouteGuardService],
+  },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
 
-
-export  const AppRoutingComponents = [
+export const AppRoutingComponents = [
   LoginComponent,
   HomeComponent,
   PageNotFoundComponent,
   TodoListComponent,
-  LogoutComponent
-]
-
-
+  LogoutComponent,
+  RegistrationComponent,
+  ReactiveFormComponent,
+];

@@ -1,4 +1,4 @@
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 export function PasswordValidator(
   control: AbstractControl
@@ -12,4 +12,12 @@ export function PasswordValidator(
   return password && confirmPassword && password.value !== confirmPassword.value
     ? { misMatch: true }
     : null;
+}
+
+export function passwordShouldNotBeUsername(forbiddenPassword: RegExp): ValidatorFn {
+
+  return ( control: AbstractControl): {[key: string]: boolean} | null => {
+   const password = forbiddenPassword.test(control.value);
+   return password ? {forbiddenPassword: true} : null;
+  };
 }

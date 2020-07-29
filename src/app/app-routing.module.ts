@@ -1,3 +1,6 @@
+import { FelxBoxComponent } from './felx-box/felx-box.component';
+import { MyWebsiteComponent } from './my-website/my-website.component';
+import { UiFundamentalComponent } from './ui-fundamental/ui-fundamental.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -8,11 +11,15 @@ import { LogoutComponent } from './logout/logout.component';
 import { RouteGuardService } from './service/route-guard.service';
 import { RegistrationComponent } from './forms/registration/registration.component';
 import {ReactiveFormComponent} from './reactive-form/reactive-form/reactive-form.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'reactive-register', component: ReactiveFormComponent },
+  {path: 'ui-fundamentals', component: UiFundamentalComponent},
+  {path: 'my-website', component: MyWebsiteComponent},
+  {path : 'flex-box', component: FelxBoxComponent},
   {path: 'home/:username', component: HomeComponent, canActivate : [RouteGuardService]},
   {
     path: 'todos',
@@ -41,4 +48,7 @@ export const AppRoutingComponents = [
   LogoutComponent,
   RegistrationComponent,
   ReactiveFormComponent,
+  UiFundamentalComponent,
+  MyWebsiteComponent,
+  FelxBoxComponent,
 ];

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PasswordValidator, passwordShouldNotBeUsername } from 'src/app/shared/password.validator';
 import { forbiddenUsername } from 'src/app/shared/username.validator';
-import { PasswordValidator } from 'src/app/shared/password.validator';
 
 @Component({
   selector: 'app-reactive-form',
@@ -11,7 +11,7 @@ import { PasswordValidator } from 'src/app/shared/password.validator';
 export class ReactiveFormComponent implements OnInit {
   reactiveRegistraion: FormGroup;
   constructor(private fb: FormBuilder) {}
-
+  // name = 'dummy';
   get username() {
     return this.reactiveRegistraion.get('username');
   }
@@ -20,6 +20,7 @@ export class ReactiveFormComponent implements OnInit {
     return this.reactiveRegistraion.get('email');
   }
   ngOnInit(): void {
+  //  const name = this.username;
     this.reactiveRegistraion = this.fb.group(
       {
         username: [
@@ -29,10 +30,12 @@ export class ReactiveFormComponent implements OnInit {
             Validators.minLength(3),
             forbiddenUsername(/password/),
             forbiddenUsername(/admin/),
+            forbiddenUsername(new RegExp(name)),
           ],
         ],
         email: [''],
-        password: ['', Validators.required],
+        password: ['', [Validators.required,
+           passwordShouldNotBeUsername(new RegExp(this.reactiveRegistraion.get('username').value))]],
         confirmPassword: ['', Validators.required],
         address: this.fb.group({
           city: ['', Validators.required],
@@ -46,7 +49,7 @@ export class ReactiveFormComponent implements OnInit {
 
     this.reactiveRegistraion
       .get('subscribe')
-      .valueChanges.subscribe((checkedValue) => {
+      .valueChanges.subscribe(checkedValue => {
         const email = this.reactiveRegistraion.get('email');
         if (checkedValue) {
           email.setValidators(Validators.required);
